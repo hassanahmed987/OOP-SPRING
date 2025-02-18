@@ -1,57 +1,84 @@
-#include <iostream>
-#include <string>
+#include<iostream>
 using namespace std;
 
-class Car {
+class car{
 private:
     string brand;
     string model;
     float rentalprice;
-    int available;  
+    bool available;
 
 public:
-    Car() {
-        brand = "unknown";
-        model = "generic";
-        rentalprice = 0.0;
-        available = 1;
+    car(){
+        brand="unknown";
+        model="generic";
+        rentalprice=0.0;
+        available=true;
     }
 
-    Car(string b, string m, float RP, int av) {
+    car(string b, string m, float rp, bool ava) {
         brand = b;
         model = m;
-        rentalprice = RP;
-        available = av;
+        rentalprice = rp;
+        available = ava;
     }
 
-    void rentalreq(int request) {
-        if (request == available&& daysrent>5) {
-            cout << "Car is rented!" << endl;
-            rentalprice=rentalprice -0.05 * rentalprice;
-            cout << "you have got a 5 percent discount";
-            cout << "your rental is" << rentalprice
-            available = 0; 
-        } 
-		else if(request == available && daysrent >10){
-			rentalprice=rentalprice-0.10*rentalprice;
-			cout<<"car rented with a 10 percent discount"
-		}
-		else {
-            cout << "Car not available!" << endl;
+    void updatedcar(string b, string m, float rp, bool ava){
+        brand = b;
+        model = m;
+        rentalprice = rp;
+        available = ava;
+    }
+
+    void display(){
+        cout << "model is " << model << endl;
+        cout << "brand is " << brand << endl;
+        cout << "rental price is " << rentalprice << endl;
+        cout << "is available " << (available ? "Yes" : "No") << endl;
+    }
+
+    bool checkavailablity(){
+        return available;
+    }
+
+    void rentalreq(){
+        if (checkavailablity()){
+            cout << "Car is available" << endl;
+            available = false;
+        }
+        else{
+            cout << "Car is already rented" << endl;
         }
     }
-    void displayCarDetails() {
-        cout << "Brand: " << brand << endl;
-        cout << "Model: " << model << endl;
-        cout << "Rental Price: " << rentalprice << endl;
-        cout << "Available: " << available << endl;
+
+    void returncar(){
+        available = true;
+        cout << "Car has been returned" << endl;
+    }
+
+    void applyDiscount(int days){
+        if (days > 10) {
+            rentalprice *= 0.90;
+            cout << "A 10% discount has been applied." << endl;
+        } else if (days > 5) {
+            rentalprice *= 0.95;
+            cout << "A 5% discount has been applied." << endl;
+        } else {
+            cout << "No discount available." << endl;
+        }
     }
 };
-int main() {
-    Car c("BMW", "M5", 2000, 1);
-    c.displayCarDetails();
-    c.rentalreq(1); 
-    c.rentalreq(1);  
 
+int main(){
+    car car1, car2("BMW", "M5", 30000, true);
+    car1.display();
+    car2.display();
+    car2.rentalreq();
+    car2.display();
+    car2.rentalreq();
+    car2.returncar();
+    car2.display();
+    car2.applyDiscount(7);
+    car2.display();
     return 0;
 }
