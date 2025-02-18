@@ -1,49 +1,72 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 class Car {
 private:
     string brand;
     string model;
-    float rentalprice;
-    int available;  
+    float rentalPrice;
+    bool available;
 
 public:
     Car() {
-        brand = "unknown";
-        model = "generic";
-        rentalprice = 0.0;
-        available = 1;
+        brand = "Unknown";
+        model = "Generic";
+        rentalPrice = 0.0;
+        available = true;
     }
 
-    Car(string b, string m, float RP, int av) {
+    void updateCar(string b, string m, float rp, bool ava) {
         brand = b;
         model = m;
-        rentalprice = RP;
-        available = av;
+        rentalPrice = rp;
+        available = ava;
     }
 
-    void rentalreq(int request) {
-        if (request == available) {
-            cout << "Car is rented!" << endl;
-            available = 0; 
+    void display() {
+        cout << "Model: " << model << endl;
+        cout << "Brand: " << brand << endl;
+        cout << "Rental Price: $" << rentalPrice << endl;
+        cout << "Available: " << (available ? "Yes" : "No") << endl;
+    }
+
+    bool checkAvailability() {
+        return available;
+    }
+
+    void rentCar() {
+        if (checkAvailability()) {
+            cout << "Car is available and has been rented." << endl;
+            available = false;
         } else {
-            cout << "Car not available!" << endl;
+            cout << "Car is already rented." << endl;
         }
     }
-    void displayCarDetails() {
-        cout << "Brand: " << brand << endl;
-        cout << "Model: " << model << endl;
-        cout << "Rental Price: " << rentalprice << endl;
-        cout << "Available: " << available << endl;
+
+    void returnCar() {
+        available = true;
+        cout << "Car has been returned." << endl;
     }
 };
+
 int main() {
-    Car c("BMW", "M5", 2000, 1);
-    c.displayCarDetails();
-    c.rentalreq(1); 
-    c.rentalreq(1);  
+    Car car1, car2;
+    car1.display();
+    
+    car2.updateCar("BMW", "M5", 30000, true);
+    car2.display();
+    
+    car2.rentCar();
+    car2.display();
+    
+    car2.rentCar(); // Trying to rent again when already rented
+    
+    car2.returnCar();
+    car2.display();
+
+    return 0;
+}
+
 
     return 0;
 }
