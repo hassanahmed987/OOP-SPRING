@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// Base class
 class Vehicle {
 public:
     string brand;
@@ -17,7 +16,6 @@ public:
     }
 };
 
-// Derived class: Car
 class Car : public Vehicle {
 public:
     int seats;
@@ -31,7 +29,6 @@ public:
     }
 };
 
-// Derived class: ElectricCar (inherits from Car)
 class ElectricCar : public Car {
 public:
     int batteryLife;
