@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-// Base class: Employee
+
 class Employee {
 protected:
     string name;
