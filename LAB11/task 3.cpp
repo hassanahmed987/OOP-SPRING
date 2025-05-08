@@ -1,11 +1,7 @@
 #include<iostream>
 #include <stdexcept>
 using namespace std;
-
-
 class TemperatureException:public exception{
-
-
 };
 
 template<typename T>
@@ -14,7 +10,6 @@ private:
  T celcius;
  public:
  Temperature(T celcius):celcius(celcius){}
-
  void convert(){
     if(celcius< (-273.15)){
         throw TemperatureException();
@@ -23,13 +18,12 @@ private:
     cout<<"Farheniet Value is "<<farhen<<endl;
  }
 };
-
 int main(){
     try{
-        cout<<"Attempting to Conver 12"<<endl;
+        cout<<"Attempting to Convert 12"<<endl;
         Temperature<int> T1(12);
         T1.convert();
-        cout<<"Attempting to Conver -280"<<endl;
+        cout<<"Attempting to Convert -280"<<endl;
         Temperature<double> T2(-280);
         T2.convert();
     }catch(TemperatureException &e){
